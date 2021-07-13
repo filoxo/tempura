@@ -11,6 +11,10 @@ console.time('ejs');
 const ejs = require('ejs');
 console.timeEnd('ejs');
 
+console.time('eta');
+const eta = require('eta');
+console.timeEnd('eta');
+
 console.time('handlebars');
 const handlebars = require('handlebars');
 console.timeEnd('handlebars');
@@ -51,6 +55,14 @@ const compilers = {
 			<% } %>
 		</ul>
 	`),
+
+	'eta': () => eta.compile(`
+		<ul>
+			<% for (var i = 0, l = it.list.length; i < l; i ++) { %>
+				<li>User: <%~ it.list[i].user %> / Web Site: <%~ it.list[i].site %></li>
+			<% } %>
+		</ul>
+	`, { include: false, includeFile: false }),
 
 	'yeahjs': () => yeahjs.compile(`
 		<ul>
